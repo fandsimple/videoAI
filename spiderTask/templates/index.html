@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>音乐播放器</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" media="all">
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+
+<body>
+<div id="box">
+    <audio loop="loop" id="vice" src="{% static 'music/6.mp3' %}" controls="controls" style="display: none;"></audio>
+    <div id="play" class="button"></div>
+    <div id="pause" class="button"></div>
+    <div id="before" class="button"></div>
+    <div id="after" class="button"></div>
+    <!--音量-->
+    <div id="volume" class="button"></div>
+    <div id="mute" class="button"></div>
+    <div id="vLength"></div>
+    <div id="vLengh1"></div>
+    <div id="vC" class="c"></div>
+    <!--播放进度-->
+    <div id="dLength"></div>
+    <div id="dLength1"></div>
+    <div id="dC" class="c"></div>
+    <!--播放时间-->
+    <div id="currentTime" class="time">00:00</div>
+    <div id="endTime" class="time"></div>
+    <!--单曲循环，顺序播放-->
+    <div id="loop" class="button"></div>
+    <div id="order" class="button"></div>
+
+    <div class="input-append" id="search">
+        <input class="span2" id="appendedInputButton" type="text">
+        <button class="btn" type="button" id="search_button" data-toggle="modal" data-target="#myModal">Go!</button>
+    </div>
+
+    <!--左边内容-->
+    <ol id="songList"></ol>
+    <button class="btn-warning" id="change">换一批</button>
+
+    <!--用户-->
+    {% ifequal userName 'null' %}
+        <div style="position: absolute; left: 30px;top: 30px; font-size: 30px" id="user">
+            <a href="/spidertask/login">登录</a>
+            <a href="/spidertask/register">注册</a>
+        </div>
+    {% else %}
+        <div style="position: absolute; left: 30px;top: 30px" id="user">
+            <img src="{% static 'img/user.png' %}" class="img-circle" width="40" height="40">
+            <span style="font-size: 25px;color: #e1e1e1;" userId="123">{{ userName }}</span>
+        </div>
+    {% endifequal %}
+    <!--左边内容-->
+    <ol id="sameList"></ol>
+
+    <!--正在播放内容-->
+    <div id="people">
+        <div id="songname">那年夏天</div>
+        <div>这是个秘密，只有你知道。</div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">查找结果</h3>
+        </div>
+        <div class="modal-body">
+            <ol id="queryRet"></ol>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+        </div>
+    </div>
+
+
+</div>
+</body>
+
+</html>
